@@ -1,0 +1,24 @@
+<div class="table-container table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">email</th>
+        <th scope="col">Created</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of userList; track item.id) {
+      <tr>
+        <th scope="row">{{item.id}}</th>
+        <td>{{item.name}}</td>
+        <td>{{item.lastname}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.createdAt | date: 'dd/MM/yyyy HH:mm'}}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

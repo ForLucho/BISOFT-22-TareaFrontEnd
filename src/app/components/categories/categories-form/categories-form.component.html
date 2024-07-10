@@ -1,0 +1,43 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p>{{title}}</p>
+    </div>
+    <div class="col-6">
+      <input #name="ngModel" type="text" class="form-control" id="name" name="name" 
+        placeholder="Category name"
+        [(ngModel)]="toUpdateCategory.name" 
+        (ngModelChange)="updateFormValidity()"
+        [ngClass]="{ 
+          'is-invalid': name.invalid && name.touched,
+          'is-valid': name.valid && name.touched
+        }" 
+        required 
+      />
+    </div>
+    <div class="col-6">
+      <input #description="ngModel" type="text" class="form-control" id="description" name="description" 
+        placeholder="Category description"
+        [(ngModel)]="toUpdateCategory.description" 
+        (ngModelChange)="updateFormValidity()"
+        [ngClass]="{ 
+          'is-invalid': description.invalid && description.touched,
+          'is-valid': description.valid && description.touched
+        }" 
+        required 
+      />
+    </div>
+    <div class="col-6 mt-3">
+      <button
+        type="button"
+        [disabled]="!formValid"
+        (click)="addEdit()"
+        class="btn btn-primary d-flex align-items-center">
+        <i class="fa-solid fa-pencil white me-2"></i>
+        <p class="mb-0"> {{title}} </p>
+      </button>
+    </div>
+  </div>
+</div>
+
