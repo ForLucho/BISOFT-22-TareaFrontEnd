@@ -24,7 +24,7 @@
 
 <app-modal size="lg" #formModal>
   <app-products-form 
-  (callParentEvent)="onFormEventCalled($event)"
+  (callParentEvent)="onFormEventCalled($event);"
   [title]="'Add Product'"
   [toUpdateProduct]="{}"
   ></app-products-form>

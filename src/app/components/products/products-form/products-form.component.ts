@@ -3,7 +3,6 @@ import { ICategory, IProduct } from '../../../interfaces';
 import { CategoryService } from '../../../services/category.service';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -29,24 +28,14 @@ export class ProductsFormComponent implements OnInit {
   formValid: boolean = false;
 
   ngOnInit(): void {
-    this.initializeCategories();
+    this.loadCategories();
     this.restoreSelectedCategory();
     this.updateFormValidity();
-  }
-  
-  initializeCategories(): void {
-    const storedCategories = localStorage.getItem('categories');
-    if (storedCategories) {
-      this.categories = JSON.parse(storedCategories);
-    } else {
-      this.loadCategories();
-    }
   }
   
   loadCategories(): void {
     this.categoryService.items$.subscribe(categories => {
       this.categories = categories;
-      localStorage.setItem('categories', JSON.stringify(categories)); 
       this.restoreSelectedCategory();
       this.cdr.detectChanges();
     });
@@ -61,7 +50,6 @@ export class ProductsFormComponent implements OnInit {
   updateCategory(newCategoryId: number | null): void {
     this.selectedCategoryId = newCategoryId;
     this.toUpdateProduct.category = this.categories.find(cat => cat.id === newCategoryId) || undefined;
-    localStorage.setItem('selectedCategoryId', JSON.stringify(newCategoryId));
   }
 
   updateFormValidity(): void {
@@ -83,4 +71,5 @@ export class ProductsFormComponent implements OnInit {
   trackByFn(index: number, item: ICategory): number {
     return item.id!;
   }
+
 }
